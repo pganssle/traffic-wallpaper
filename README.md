@@ -6,7 +6,7 @@ These scripts grab the traffic data from [Houston TranStar](http://www.houstontr
     <a href="https://raw.githubusercontent.com/pganssle/traffic-wallpaper/master/images/wallpaper/composite_map.png"><img src="https://raw.githubusercontent.com/pganssle/traffic-wallpaper/master/images/wallpaper/composite_map.png"></a>
 </div>
 
-The `run_updates.pyw` updates the images every 30 seconds (configurable time interval in the `settings.json` file), and sets it to my desktop background (Windows). There doesn't seem to be a good way to set the desktop backgrounds individually, but since I want a different background on each screen, I make a composite image out of the traffic map and the other backgrounds.
+The `run_updates.pyw` updates the images every 30 seconds (configurable time interval in the `settings.json` file), and sets it to my desktop background (Windows). There doesn't seem to be a good way to set the desktop backgrounds individually, but since I want a different background on each screen, I make a composite image out of the traffic map and the other backgrounds. This generates a lock file (defaults to `runner.txt`) when it starts running. If you want to stop it running, just delete that file to stop the program (this allows me to avoid having any kind of user interface).
 
 The `RunUpdates.bat` batch file is a wrapper for `run_updates.pyw`, and can be used if you want to use Task Scheduler to automatically start the script on startup. Unfortunately, it leaves a console window up - see [this SO question](https://stackoverflow.com/questions/324539/how-can-i-run-a-program-from-a-batch-file-without-having-the-console-open-after) for details on how to fix that, if that's your problem.
 
