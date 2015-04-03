@@ -10,4 +10,4 @@ The `run_updates.pyw` updates the images every 30 seconds (configurable time int
 
 The `RunUpdates.bat` batch file is a wrapper for `run_updates.pyw`, and can be used if you want to use Task Scheduler to automatically start the script on startup. Unfortunately, it leaves a console window up - see [this SO question](https://stackoverflow.com/questions/324539/how-can-i-run-a-program-from-a-batch-file-without-having-the-console-open-after) for details on how to fix that, if that's your problem.
 
-Requires [Pillow](http://pillow.readthedocs.org/index.html).
+Requires [Pillow](http://pillow.readthedocs.org/index.html) and [requests](http://docs.python-requests.org/en/latest/).
