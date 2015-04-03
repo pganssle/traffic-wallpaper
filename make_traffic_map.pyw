@@ -6,14 +6,41 @@ This was slapped-together in not much time - it could use cleaning up.
 """
 from __future__ import division         # Use Python 3.x division
 
-try:
-    import urllib2
-except ImportError:
-    import urllib.request as urllib2
+import requests
+import shutil
 
 from PIL import Image
 import json
 import os
+
+# Functions and classes for handling downloads
+class HTTPError(Exception):
+    pass
+
+def download_image(url, loc, error=None):
+    """
+    Downloads the image at `url` to `loc`.
+
+    @param error:
+        If `True`, an error is thrown whenever it is not possible to download
+        the image. If `False`, errors are never thrown. If `None` or omitted,
+        an error is thrown only when the file does not exist (e.g. if it has
+        has been downloaded once it will be skipped).
+    
+    @raises HTTPError
+    """
+    resp = requests.get(url, stream=True)
+    status = resp.status_code
+    if status == 200:
+        file_obj = resp.raw
+        with open(loc, 'wb') as img:
+            shutil.copyfileobj(file_obj, img)
+    else:
+        if error or (error is None and not os.path.exists(loc)):
+            raise HTTPError('An HTTP error has occurred, response code: ' +
+                            repr(status))
+
+
 
 # Load settings
 with open("settings.json", "r") as sf:
@@ -38,26 +65,12 @@ with open("settings.json", "r") as sf:
 ###
 # Image Download
 ###
-
-# Set up the image locations
 tm_loc = os.path.join(id_fold, 'traffic_map.gif')
 cam_locs = os.path.join(id_fold, 'img_{:02.0f}.jpg')
 
-# Main map
-f = urllib2.urlopen(map_url)
-data = f.read()
-with open(tm_loc, 'wb') as img:
-    img.write(data)
-
-# Camera values
+download_image(map_url, tm_loc)
 for ii, url in enumerate(cam_urls):
-    try:
-        f = urllib2.urlopen(url)
-        data = f.read()
-        with open(cam_locs.format(ii), 'wb') as imfile:
-            imfile.write(data)
-    except urllib2.HTTPError:
-        pass            # Ignore HTTP errors, just use the old images
+    download_image(url, cam_locs.format(ii))
 
 ###
 # Image Patching

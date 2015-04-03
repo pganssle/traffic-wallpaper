@@ -68,7 +68,7 @@
     "image_path":"images/wallpaper",
     "merge_path":"images/full_wallpaper.bmp",
     "monitor_resolutions":[[1920, 1080], [1920, 1080], [1920, 1080]],
-    "image_names":["Kowloon.png", "thailand_background.png", "composite_map.png"],
+    "image_names":["Kowloon.png", "thailand_background.jpg", "composite_map.png"],
     "desktop_locs":[2, 1, 3],
     "time_interval":30,
     "runner_file":"runner.txt"

@@ -20,8 +20,8 @@ save_wallpaper_loc = os.path.join(scriptloc, "set_wallpaper.pyw")
 open(runner_file, 'w+').close() # Create this file. Delete it to stop the script.
 
 while os.path.exists(runner_file):
-    call(["pythonw.exe", make_map_loc])
-    call(["pythonw.exe", merge_set_loc])
-    call(["pythonw.exe", save_wallpaper_loc])
+    call(["python.exe", make_map_loc])
+    call(["python.exe", merge_set_loc])
+    call(["python.exe", save_wallpaper_loc])
     sleep(time_interval)
 
